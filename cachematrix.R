@@ -46,36 +46,39 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## This function will make an inverse matrix if a matrix is not already created
-## and stored
+## and stored by makeCacheMatrix
 # Method:
 # The solve() function will calculate the inverse of a matrix
 # The arguments for this function is solve(a, b, ...) where,
 # both a/b are numeric or complex matrixes
-# Alternativelt the givn() function also retuns the inverse of a matrix
+# Alternative the givn() function from MASS also retuns the inverse of a matrix
 # The arguments for this function is ginv(X, tol = sqrt(.Machine$double.eps))
 # where 'X' is the matrix to determine the inverse on
 
 cacheSolve <- function(x, ...) {
-
-  # The solve() function will calculate the inverse of a matrix
-  # The arguments for this function is solve(a, b, ...) where,
-  # both a/b are numeric or complex matrixes
-  # Alternativelt the givn() function also retuns the inverse of a matrix
-  # The arguments for this function is ginv(X, tol = sqrt(.Machine$double.eps))
-  # where 'X' is the matrix to determine the inverse on
+  # I am going to use the givn() function which is in the MASS package
+  library(MASS)
   
+  # First Check if matrix has been calculated/stored already
+  my_matrix <- x$getinverse()
   
-  # Here I will return a matrix that is the inverse of 'x'
+  # Second Check if cache function 'makeCacheMatrix()' ran yet
+  # If the inverse matrix exist then return the matrix
+  # The if argument is stating: if the object 'my_matrix' is NOT EMPTY then
+  # return the object 'my_matrix'
+  if (!is.null(my_matrix)){
+    return(my_matrix)
+  }
+  
+  else{
+  # Third I will return a matrix that is the inverse of 'x' using ginv()
+  dat <- x$get()
+  my_matrix <- ginv(dat)
+  x$setinverse(my_matrix)
   # I will use the return function
-  return()
+  return(my_matrix)
+  }
 }
-
-
-
-
-
-
-
 
 
 
