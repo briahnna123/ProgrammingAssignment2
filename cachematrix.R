@@ -1,5 +1,5 @@
 # R Programming Assignment #2: "Caching the Inverse of a Matrix"
-# General Instructions/Goals:
+# General Instructions and Goals:
 # The goal of this assignment is to create two functions: 
 # One that caches the inverse values for an invertable matrix
 # One that calculates inverse values for a matrix if not already cached
@@ -7,7 +7,7 @@
 # Functions:
 ## The function below will take a matrix from user input, then store
 ## the matrix in a cache 
-# Here I am making a function() and taking it into the argument 'x' but
+# Here I am making a function() and taking in the argument 'x' but
 # storing it into the object 'makeCacheMatrix'. 
 # 'x' is converted to a matrix using the matrix() function
 makeCacheMatrix <- function(x = matrix()) {
@@ -44,7 +44,6 @@ makeCacheMatrix <- function(x = matrix()) {
   
 }
 
-
 ## This function will make an inverse matrix if a matrix is not already created
 ## and stored by makeCacheMatrix
 # Method:
@@ -70,26 +69,18 @@ cacheSolve <- function(x, ...) {
     return(my_matrix)
   }
   
-  else{
+  else {
   # Third I will return a matrix that is the inverse of 'x' using ginv()
+  #Retrive the non- inverse matrix
   dat <- x$get()
+  
+  # Fourth Use the ginv() function to get inverse
   my_matrix <- ginv(dat)
+  
+  # Fifth set the value to the cached/stored for later use 
   x$setinverse(my_matrix)
-  # I will use the return function
+  
+  # I will use the return function to return the Inverse Matrix
   return(my_matrix)
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
